@@ -1,9 +1,12 @@
 package es.cesguiro.proyect1daw.common;
 
+import lombok.extern.log4j.Log4j2;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+@Log4j2
 public class AppPropertiesReader {
 
     private static Properties properties = new Properties();
@@ -14,7 +17,7 @@ public class AppPropertiesReader {
         // Detectar el perfil y cargar las propiedades correspondientes
         String activeProfile = getProperty("app.profiles.active");
         if (activeProfile != null) {
-            System.out.println("Perfil activo: " + activeProfile);
+            log.info("Perfil activo: " + activeProfile);
             loadProperties("application-" + activeProfile + ".properties");
         }
 
