@@ -1,4 +1,4 @@
--- data.sql
+-- V1__data.sql
 
 -- Inserción de datos
 INSERT INTO movies (title, "year", runtime) VALUES

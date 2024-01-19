@@ -1,4 +1,4 @@
--- schema.sql
+-- V1__schema.sql
 
 -- Creación de la tabla movies
 CREATE TABLE IF NOT EXISTS movies (
