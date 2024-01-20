@@ -1,11 +1,11 @@
-package mock;
+package es.cesguiro.proyect1daw.mock;
 
 import es.cesguiro.proyect1daw.domain.entity.Movie;
-import es.cesguiro.proyect1daw.persistence.dao.MovieDao;
+import es.cesguiro.proyect1daw.domain.repository.MovieRepository;
 
 import java.util.List;
 
-public class MovieDaoMockImpl implements MovieDao {
+public class MovieRepositoryMockImpl implements MovieRepository {
 
     List<Movie> movieList = List.of(
             new Movie(1, "Cadena perpetua", 1994, 142),

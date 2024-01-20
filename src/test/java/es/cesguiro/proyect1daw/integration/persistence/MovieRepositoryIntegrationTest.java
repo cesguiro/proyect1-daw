@@ -1,4 +1,4 @@
-package es.cesguiro.proyect1daw.integration;
+package es.cesguiro.proyect1daw.integration.persistence;
 
 import es.cesguiro.proyect1daw.common.factory.MovieFactory;
 import es.cesguiro.proyect1daw.domain.entity.Movie;
