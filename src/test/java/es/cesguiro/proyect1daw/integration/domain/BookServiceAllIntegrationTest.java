@@ -1,20 +1,22 @@
 package es.cesguiro.proyect1daw.integration.domain;
 
-import es.cesguiro.proyect1daw.common.factory.MovieFactory;
-import es.cesguiro.proyect1daw.domain.entity.Movie;
-import es.cesguiro.proyect1daw.domain.service.MovieService;
+import es.cesguiro.proyect1daw.common.factory.BookFactory;
+import es.cesguiro.proyect1daw.domain.entity.Book;
+import es.cesguiro.proyect1daw.domain.service.BookService;
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.MigrationInfo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MovieServiceAllIntegrationTest {
+public class BookServiceAllIntegrationTest {
 
-    private final MovieService movieService = MovieFactory.getMovieService();
+    private final BookService bookService = BookFactory.getBookService();
 
     @BeforeEach
     public void beforeEach(){
@@ -32,13 +34,14 @@ public class MovieServiceAllIntegrationTest {
     }
     @Test
     public void testFindAll() {
-        List<Movie> movies = movieService.findAll();
-        assertEquals(3, movies.size());
-
-        assertEquals("Cadena perpetua", movies.get(0).getTitle());
-        System.out.println(movies.get(0));
-        assertEquals(1994, movies.get(0).getYear());
-        assertEquals(142, movies.get(0).getRuntime());
+        Book expectedSecondBook = new Book(
+                "9788426418197",
+                "El nombre de la rosa",
+                "Valiéndose de las características de la novela gótica...",
+                new BigDecimal(12.30).setScale(2, RoundingMode.HALF_UP),
+                "nombreRosa.jpeg");
+        List<Book> books = bookService.findAll();
+        assertEquals(expectedSecondBook, books.get(1));
 
     }
 }
