@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+
+<form action="/cart" method="POST">
+    <input type="hidden" name="id" th:value="${book.id}">
+    <img class="w-25" th:src="@{${'/images/cover/' + book.cover}}" alt="Card image cap">
+    <p th:text="|${book.title} (${book.isbn})|"></p>
+    <p th:text="${book.synopsis}"></p>
+    <p th:text="${book.price}"></p>
+    <input type="submit" value="Añadir">
+</form>
+
+</body>
+</html>

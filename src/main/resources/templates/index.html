@@ -1,13 +1,13 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Proyecto 1 DAW - Index</title>
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
 </head>
 <body>
-Página principal
+<nav th:replace="~{layouts/base:: menu}"></nav>
+<h3 class="text-center mt-5">Bienvenido/a a BookShop</h3>
+<footer th:replace="~{layouts/base :: footer}"></footer>
+<script th:replace="~{layouts/base :: jquery}"></script>
+<script th:replace="~{layouts/base :: popper}"></script>
+<script th:replace="~{layouts/base :: bootstrap}"></script>
 </body>
 </html>

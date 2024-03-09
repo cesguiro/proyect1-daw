@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+<h3 class="text-center mt-5" th:text:${message}}>404 - Not found</h3>
+<footer th:replace="~{layouts/base :: footer}"></footer>
+<script th:replace="~{layouts/base :: jquery}"></script>
+<script th:replace="~{layouts/base :: popper}"></script>
+<script th:replace="~{layouts/base :: bootstrap}"></script>
+</body>
+</html>
