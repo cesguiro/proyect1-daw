@@ -43,4 +43,18 @@ public class OrderDaoStaticImpl implements OrderDao {
                 .findFirst();
     }
 
+    @Override
+    public void save(OrderEntity orderEntity) {
+        orderEntityList.add(orderEntity);
+    }
+
+    @Override
+    public void updateStatus(OrderEntity orderEntity) {
+        orderEntityList
+                .stream()
+                .filter(entity -> entity.getId().equals(orderEntity.getId()))
+                .findFirst()
+                .ifPresent(entity -> entity.setStatus(orderEntity.getStatus()));
+    }
+
 }

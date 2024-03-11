@@ -8,4 +8,6 @@ public interface CartService {
     Cart findByUserId(int userId);
 
     void addCartDetail(Cart cart, CartDetail cartDetail);
+
+    void update(Cart cart);
 }

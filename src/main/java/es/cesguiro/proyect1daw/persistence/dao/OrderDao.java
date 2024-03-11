@@ -13,4 +13,7 @@ public interface OrderDao {
 
     Optional<OrderEntity> findById(Integer id);
 
+    void save(OrderEntity orderEntity);
+
+    void updateStatus(OrderEntity orderEntity);
 }

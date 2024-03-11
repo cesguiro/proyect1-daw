@@ -34,7 +34,7 @@ public class BookDaoStaticImpl implements BookDao {
                         new BookEntity(
                                 3,
                                 "9786074213485",
-                                "La insoporatble levedad del ser",
+                                "La insoportable levedad del ser",
                                 "La insoportable levedad del ser es una novela del escritor checo Milan Kundera publicada en 1984. La novela es una exploración filosófica de la vida, el amor, la muerte y la eternidad. La historia se desarrolla en Praga, capital de Checoslovaquia, en la década de 1960. La novela es una narrativa de múltiples capas que se centra en la vida de cuatro personajes principales: Tomáš, Teresa, Sabina y Franz.",
                                 new BigDecimal(11.50),
                                 "levedad.jpeg",

@@ -52,7 +52,7 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public void save(Cart cart) {
+    public void save(Cart cart, int status) {
         OrderEntity orderEntity = OrderMapper.toOrderEntity(cart);
         List<OrderDetailEntity> orderDetailEntityList = cart.getCartDetailList()
                 .stream()
@@ -69,5 +69,14 @@ public class CartRepositoryImpl implements CartRepository {
         orderDetailDao.deleteByOrderId(orderEntity.getId());
         //guardamos los detalles del pedido
         orderDetailEntityList.forEach(orderDetailDao::save);
+        //Si el carrito cambia de estado, actualizamos el estado del pedido y creamos un nuevo carrito
+        if (status != 0) {
+            orderEntity.setStatus(status);
+            orderDao.updateStatus(orderEntity);
+            orderEntity = new OrderEntity();
+            orderEntity.setUserId(cart.getUser().getId());
+            orderEntity.setStatus(0);
+            orderDao.save(orderEntity);
+        }
     }
 }

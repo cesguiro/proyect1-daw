@@ -62,6 +62,20 @@ public class CartServiceImpl implements CartService {
             cartDetail.setPrice(book.getPrice());
             cart.addCartDetail(cartDetail);
         }
-        cartRepository.save(cart);
+        cartRepository.save(cart, 0);
+    }
+
+    @Override
+    public void update(Cart cart) {
+        //mirar si los libros existen
+        cart.getCartDetailList().forEach(
+                cartDetail -> {
+                    BookRepository bookRepository = BookIoc.getBookRepository();
+                    Book book = bookRepository.findById(cartDetail.getBook().getId()).orElseThrow(() -> new RuntimeException("Book not found"));
+                    cartDetail.setBook(book);
+                    cartDetail.setPrice(book.getPrice());
+                }
+        );
+        cartRepository.save(cart, 1);
     }
 }

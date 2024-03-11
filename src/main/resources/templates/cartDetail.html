@@ -21,6 +21,7 @@
                                 <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
                             </a>
                             <input type="hidden" th:field="*{cartDetailList[__${itemStat.index}__].id}">
+                            <input type="hidden" th:field="*{cartDetailList[__${itemStat.index}__].book.id}">
                             <input type="number" min="1" max="5" th:field="*{cartDetailList[__${itemStat.index}__].quantity}">
                             <span th:text="|${cartDetail.price} €|"></span>
                         </li>
