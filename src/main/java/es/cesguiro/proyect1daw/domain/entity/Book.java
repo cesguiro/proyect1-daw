@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Data //incluye @Getter, @Setter, @ToString y @EqualsAndHashCode
@@ -28,7 +29,11 @@ public class Book {
         this.isbn = isbn;
         this.title = title;
         this.synopsis = synopsis;
-        this.price = price;
+        this.price = price.setScale(2, RoundingMode.HALF_UP);
         this.cover = cover;
+    }
+
+    public Book(int bookId) {
+        this.id = bookId;
     }
 }

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:rel="stylesheet" th:href="@{/css/bootstrap/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/css/main.css}">
     <title th:text="${title}">Document</title>
 </head>
 <body>
@@ -20,14 +21,14 @@
                 </a>
                 <a class="nav-link" href="/books">Libros</a>
             </div>
-            <div class="navbar-nav" th:if="${session.isEmpty()}" >
-                <a class="nav-link" href="/registro">Registro</a>
-                <a class="nav-link" href="/login">Login</a>
+            <!--<div class="navbar-nav" th:if="${session.isEmpty()}" >
+                <a class="nav-link" href="/singup">Registro</a>
+                <a class="nav-link" href="/singin">Login</a>
             </div>
-            <div class="navbar-nav" th:unless="${session.isEmpty()}">
-                <a class="nav-link" href="/carritos/activo">Carrito</a>
-                <a class="nav-link" th:href="@{${'/users/' + session.user_id + '/carritos'}} ">Pedidos</a>
-                <a class="nav-link" href="/logout">logout</a>
+            <div class="navbar-nav" th:unless="${session.isEmpty()}">-->
+            <div class="navbar-nav">
+                <a class="nav-link" href="/carts">Carrito</a>
+                <a class="nav-link" href="/orders">Pedidos</a>
             </div>
         </div>
     </div>
@@ -35,7 +36,7 @@
 
 
 <footer th:fragment="footer" class="text-center mb-5 fixed-bottom">
-    &copy;2022 Todos los derechos reservados
+    &copy;2024 Todos los derechos reservados
 </footer>
 
 <script th:fragment="jquery" th:src="@{/js/jquery/jquery.min.js}"></script>
