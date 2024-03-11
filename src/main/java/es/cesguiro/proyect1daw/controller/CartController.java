@@ -40,5 +40,11 @@ public class CartController {
         return "cartDetail";
     }
 
+    @PutMapping
+    public String update(@ModelAttribute Cart cart) {
+        System.out.println(cart);
+        return null;
+    }
+
 
 }

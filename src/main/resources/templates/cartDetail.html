@@ -10,16 +10,23 @@
         <div class="col-12 col-sm-8 col-lg-5">
             <h6 class="text-muted" th:text="|Carrito  - ${cart.total} €|"></h6>
             <ul class="list-group">
-                <a th:each="cartDetail : ${cart.cartDetailList}" th:href="@{${'/books/' + cartDetail.book.id}}">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <div class="image-parent">
-                            <img th:src="@{${'/images/cover/' + cartDetail.book.cover}}" class="img-fluid" th:alt="${cartDetail.book.title}" style="height: 100px">
-                        </div>
-                        <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
-                        <input type="number" min="1" max="5" name="quantity" th:value="${cartDetail.quantity}">
-                        <span th:text="|${cartDetail.price} €|"></span>
-                    </li>
-                </a>
+
+                <form action="/carts" th:method="PUT" th:object="${cart}">
+                        <input type="hidden" th:field="*{id}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" th:each="cartDetail, itemStat : *{cartDetailList}">
+                            <a th:href="@{${'/books/' + cartDetail.book.id}}">
+                                <div class="image-parent">
+                                    <img th:src="@{${'/images/cover/' + cartDetail.book.cover}}" class="img-fluid" th:alt="${cartDetail.book.title}" style="height: 100px">
+                                </div>
+                                <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
+                            </a>
+                            <input type="hidden" th:field="*{cartDetailList[__${itemStat.index}__].id}">
+                            <input type="number" min="1" max="5" th:field="*{cartDetailList[__${itemStat.index}__].quantity}">
+                            <span th:text="|${cartDetail.price} €|"></span>
+                        </li>
+                    <button type="submit" class="btn btn-info">Finalizar</button>
+                </form>
+
             </ul>
         </div>
     </div>

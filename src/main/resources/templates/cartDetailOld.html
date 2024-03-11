@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-8 col-lg-5">
+            <h6 class="text-muted" th:text="|Carrito  - ${cart.total} €|"></h6>
+            <ul class="list-group">
+                    <a th:each="cartDetail : ${cart.cartDetailList}" th:href="@{${'/books/' + cartDetail.book.id}}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <div class="image-parent">
+                                <img th:src="@{${'/images/cover/' + cartDetail.book.cover}}" class="img-fluid" th:alt="${cartDetail.book.title}" style="height: 100px">
+                            </div>
+                            <span th:text="${cartDetail.book.title}" style="font-weight: bold"></span>
+                            <input type="number" min="1" max="5" name="quantity" th:value="${cartDetail.quantity}">
+                            <span th:text="|${cartDetail.price} €|"></span>
+                        </li>
+                    </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
