@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class OrderDaoStaticImpl implements OrderDao {
 
-    List<OrderEntity> orderEntityList = new ArrayList<>();
+    static List<OrderEntity> orderEntityList = new ArrayList<>();
 
     public OrderDaoStaticImpl() {
         orderEntityList.add(new OrderEntity(1, 1, 0));
