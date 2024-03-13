@@ -29,6 +29,7 @@ public class OrderDaoStaticImpl implements OrderDao {
 
     @Override
     public List<OrderEntity> findAllByUserId(Integer id) {
+        //List<orderEntity>
         return orderEntityList
                 .stream()
                 .filter(orderEntity -> orderEntity.getUserId().equals(id) && orderEntity.getStatus() != 0)
@@ -55,6 +56,17 @@ public class OrderDaoStaticImpl implements OrderDao {
                 .filter(entity -> entity.getId().equals(orderEntity.getId()))
                 .findFirst()
                 .ifPresent(entity -> entity.setStatus(orderEntity.getStatus()));
+    }
+
+    @Override
+    public void delete(Integer id) {
+        orderEntityList.removeIf(orderEntity -> orderEntity.getId().equals(id));
+    }
+
+    @Override
+    public void createCart(Integer userId) {
+        int id = orderEntityList.stream().map(OrderEntity::getId).max(Integer::compareTo).orElse(0) + 1;
+        orderEntityList.add(new OrderEntity(id, userId, 0));
     }
 
 }

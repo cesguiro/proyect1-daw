@@ -2,6 +2,7 @@ package es.cesguiro.proyect1daw.persistence.repository.impl;
 
 import es.cesguiro.proyect1daw.common.container.BookIoc;
 import es.cesguiro.proyect1daw.common.container.OrderDetailIoc;
+import es.cesguiro.proyect1daw.domain.entity.Cart;
 import es.cesguiro.proyect1daw.domain.entity.Order;
 import es.cesguiro.proyect1daw.domain.entity.OrderDetail;
 import es.cesguiro.proyect1daw.domain.entity.User;
@@ -64,6 +65,12 @@ public class OrderRepositoryImpl implements OrderRepository {
         orderDetailList.forEach(order::addOrderDetail);
 
         return Optional.of(order);
+    }
+
+    @Override
+    public void save(Cart cart) {
+        //creamos el pedido con los datos del carrito
+        //guardamos el pedido
     }
 
 }

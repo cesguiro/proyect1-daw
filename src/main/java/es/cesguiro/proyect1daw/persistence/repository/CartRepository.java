@@ -8,5 +8,11 @@ public interface CartRepository {
 
     Optional<Cart> findByUserId(Integer userId);
 
-    void save(Cart cart, int satus);
+    void save(Cart cart);
+
+    void saveAsOrder(Cart cart);
+
+    void delete(Cart cart);
+
+    void createCart(Integer id);
 }

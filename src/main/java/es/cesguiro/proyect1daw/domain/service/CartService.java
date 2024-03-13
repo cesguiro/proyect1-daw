@@ -9,5 +9,5 @@ public interface CartService {
 
     void addCartDetail(Cart cart, CartDetail cartDetail);
 
-    void update(Cart cart);
+    void saveAsOrder(Cart cart);
 }

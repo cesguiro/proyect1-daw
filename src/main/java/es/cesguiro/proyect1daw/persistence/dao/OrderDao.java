@@ -16,4 +16,8 @@ public interface OrderDao {
     void save(OrderEntity orderEntity);
 
     void updateStatus(OrderEntity orderEntity);
+
+    void delete(Integer id);
+
+    void createCart(Integer userId);
 }

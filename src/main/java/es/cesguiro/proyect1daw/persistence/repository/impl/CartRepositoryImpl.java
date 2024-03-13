@@ -52,7 +52,7 @@ public class CartRepositoryImpl implements CartRepository {
     }
 
     @Override
-    public void save(Cart cart, int status) {
+    public void save(Cart cart) {
         OrderEntity orderEntity = OrderMapper.toOrderEntity(cart);
         List<OrderDetailEntity> orderDetailEntityList = cart.getCartDetailList()
                 .stream()
@@ -70,13 +70,44 @@ public class CartRepositoryImpl implements CartRepository {
         //guardamos los detalles del pedido
         orderDetailEntityList.forEach(orderDetailDao::save);
         //Si el carrito cambia de estado, actualizamos el estado del pedido y creamos un nuevo carrito
-        if (status != 0) {
+        /*if (status != 0) {
             orderEntity.setStatus(status);
             orderDao.updateStatus(orderEntity);
             orderEntity = new OrderEntity();
             orderEntity.setUserId(cart.getUser().getId());
             orderEntity.setStatus(0);
             orderDao.save(orderEntity);
-        }
+        }*/
+    }
+
+    @Override
+    public void saveAsOrder(Cart cart) {
+        OrderEntity orderEntity = OrderMapper.toOrderEntity(cart);
+        orderEntity.setStatus(1);
+        List<OrderDetailEntity> orderDetailEntityList = cart.getCartDetailList()
+                .stream()
+                .map(
+                        cartDetail -> {
+                            OrderDetailEntity orderDetailEntity = CartDetailMapper.toOrderDetailEntity(cartDetail);
+                            orderDetailEntity.setOrderId(cart.getId());
+                            return orderDetailEntity;
+                        }
+                )
+                .toList();
+        OrderDetailDao orderDetailDao = OrderDetailIoc.getOrderDetailDao();
+        //borramos los detalles del pedido
+        orderDetailDao.deleteByOrderId(orderEntity.getId());
+        //guardamos los detalles del pedido
+        orderDetailEntityList.forEach(orderDetailDao::save);
+    }
+
+    @Override
+    public void delete(Cart cart) {
+        orderDao.delete(cart.getId());
+    }
+
+    @Override
+    public void createCart(Integer userId) {
+        orderDao.createCart(userId);
     }
 }

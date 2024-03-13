@@ -20,14 +20,14 @@ public class OrderIoc {
         return orderService;
     }
 
-    private static OrderRepository getOrderRepository() {
+    public static OrderRepository getOrderRepository() {
         if (orderRepository == null) {
             orderRepository = new OrderRepositoryImpl(getOrderDao());
         }
         return orderRepository;
     }
 
-    private static OrderDao getOrderDao() {
+    public static OrderDao getOrderDao() {
         if (orderDao == null) {
             orderDao = new OrderDaoStaticImpl();
         }

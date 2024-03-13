@@ -41,11 +41,11 @@ public class CartController {
     }
 
     @PutMapping
-    public String update(@ModelAttribute Cart cart) {
+    public String saveAsOrder(@ModelAttribute Cart cart) {
         //System.out.println(cart);
         int userId = User.USER_ID; //Simulamos que el usuario está logueado y leemos el usuario de la sesión
         cart.setUser(new User(userId));
-        cartService.update(cart);
+        cartService.saveAsOrder(cart);
         return "redirect:/orders";
     }
 

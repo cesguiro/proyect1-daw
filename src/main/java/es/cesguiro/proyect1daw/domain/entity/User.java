@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
  @NoArgsConstructor
 public class User {
 
-    public static final int USER_ID = 2;
+    public static final int USER_ID = 1;
 
     private static User user;
     private Integer id;

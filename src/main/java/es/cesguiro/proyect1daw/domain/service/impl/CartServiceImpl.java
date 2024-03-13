@@ -1,12 +1,14 @@
 package es.cesguiro.proyect1daw.domain.service.impl;
 
 import es.cesguiro.proyect1daw.common.container.BookIoc;
+import es.cesguiro.proyect1daw.common.container.OrderIoc;
 import es.cesguiro.proyect1daw.domain.entity.Book;
 import es.cesguiro.proyect1daw.domain.entity.Cart;
 import es.cesguiro.proyect1daw.domain.entity.CartDetail;
 import es.cesguiro.proyect1daw.domain.service.CartService;
 import es.cesguiro.proyect1daw.persistence.repository.BookRepository;
 import es.cesguiro.proyect1daw.persistence.repository.CartRepository;
+import es.cesguiro.proyect1daw.persistence.repository.OrderRepository;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -62,11 +64,11 @@ public class CartServiceImpl implements CartService {
             cartDetail.setPrice(book.getPrice());
             cart.addCartDetail(cartDetail);
         }
-        cartRepository.save(cart, 0);
+        cartRepository.save(cart);
     }
 
     @Override
-    public void update(Cart cart) {
+    public void saveAsOrder(Cart cart) {
         //mirar si los libros existen
         cart.getCartDetailList().forEach(
                 cartDetail -> {
@@ -76,6 +78,12 @@ public class CartServiceImpl implements CartService {
                     cartDetail.setPrice(book.getPrice());
                 }
         );
-        cartRepository.save(cart, 1);
+
+        //guardar el carrito como pedido
+        cartRepository.saveAsOrder(cart);
+        //eliminar el carrito actual del usuario
+        cartRepository.delete(cart);
+        //crear un nuevo carrito para el usuario
+        cartRepository.createCart(cart.getUser().getId());
     }
 }
