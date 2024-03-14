@@ -83,7 +83,7 @@ public class CartRepositoryImpl implements CartRepository {
     @Override
     public void saveAsOrder(Cart cart) {
         OrderEntity orderEntity = OrderMapper.toOrderEntity(cart);
-        orderEntity.setStatus(1);
+        orderDao.setStatus(orderEntity, 1);
         List<OrderDetailEntity> orderDetailEntityList = cart.getCartDetailList()
                 .stream()
                 .map(

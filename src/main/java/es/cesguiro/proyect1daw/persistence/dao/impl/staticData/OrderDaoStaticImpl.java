@@ -29,7 +29,6 @@ public class OrderDaoStaticImpl implements OrderDao {
 
     @Override
     public List<OrderEntity> findAllByUserId(Integer id) {
-        //List<orderEntity>
         return orderEntityList
                 .stream()
                 .filter(orderEntity -> orderEntity.getUserId().equals(id) && orderEntity.getStatus() != 0)

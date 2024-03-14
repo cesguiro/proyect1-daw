@@ -22,15 +22,15 @@ public class CartIoc {
 
     public static CartRepository getCartRepository() {
         if (cartRepository == null) {
-            cartRepository = new CartRepositoryImpl(getOrderDao());
+            cartRepository = new CartRepositoryImpl(OrderIoc.getOrderDao());
         }
         return cartRepository;
     }
 
-    public static OrderDao getOrderDao() {
+    /*public static OrderDao getOrderDao() {
         if (orderDao == null) {
             orderDao = new OrderDaoStaticImpl();
         }
         return orderDao;
-    }
+    }*/
 }
