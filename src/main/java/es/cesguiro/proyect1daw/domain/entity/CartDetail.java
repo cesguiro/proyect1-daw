@@ -1,5 +1,7 @@
 package es.cesguiro.proyect1daw.domain.entity;
 
+import es.cesguiro.proyect1daw.common.container.BookIoc;
+import es.cesguiro.proyect1daw.persistence.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,5 +31,10 @@ public class CartDetail {
 
     public BigDecimal getTotal() {
         return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+        this.setPrice(book.getPrice());
     }
 }

@@ -56,12 +56,8 @@ public class CartServiceImpl implements CartService {
                     }
                 }
         );
-        // Si el libro no está en el carrito, lo buscamos y, si existe, lo añadimos. Si no existe lanzamos una excepción
         if (!bookExists.get()) {
-            BookRepository bookRepository = BookIoc.getBookRepository();
-            Book book = bookRepository.findById(cartDetail.getBook().getId()).orElseThrow(() -> new RuntimeException("Book not found"));
-            cartDetail.setBook(book);
-            cartDetail.setPrice(book.getPrice());
+            addBookToCartDetail(cartDetail, cartDetail.getBook().getId());
             cart.addCartDetail(cartDetail);
         }
         cartRepository.save(cart);
@@ -69,21 +65,19 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void saveAsOrder(Cart cart) {
-        //mirar si los libros existen
         cart.getCartDetailList().forEach(
-                cartDetail -> {
-                    BookRepository bookRepository = BookIoc.getBookRepository();
-                    Book book = bookRepository.findById(cartDetail.getBook().getId()).orElseThrow(() -> new RuntimeException("Book not found"));
-                    cartDetail.setBook(book);
-                    cartDetail.setPrice(book.getPrice());
-                }
+                cartDetail -> addBookToCartDetail(cartDetail, cartDetail.getBook().getId())
         );
 
         //guardar el carrito como pedido
         cartRepository.saveAsOrder(cart);
-        //eliminar el carrito actual del usuario
-        cartRepository.delete(cart);
         //crear un nuevo carrito para el usuario
         cartRepository.createCart(cart.getUser().getId());
+    }
+
+    private void addBookToCartDetail(CartDetail cartDetail, int bookId) {
+        BookRepository bookRepository = BookIoc.getBookRepository();
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        cartDetail.setBook(book);
     }
 }

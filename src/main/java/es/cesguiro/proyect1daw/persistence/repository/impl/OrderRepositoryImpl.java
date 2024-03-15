@@ -67,10 +67,4 @@ public class OrderRepositoryImpl implements OrderRepository {
         return Optional.of(order);
     }
 
-    @Override
-    public void save(Cart cart) {
-        //creamos el pedido con los datos del carrito
-        //guardamos el pedido
-    }
-
 }

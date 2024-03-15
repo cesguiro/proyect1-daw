@@ -11,6 +11,4 @@ public interface OrderRepository {
     List<Order> findAllByUser(User user);
 
     Optional<Order> findById(Integer id);
-
-    void save(Cart cart);
 }
